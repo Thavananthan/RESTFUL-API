@@ -5,6 +5,8 @@ const hpp=require('hpp');
 const mongoSanitize=require('express-mongo-sanitize');
 const xss=require('xss-clean');
 const rateLimit=require('express-rate-limit');
+const compression=require('compression');
+
 const userRouter=require('./routes/userRouter');
 const tourRouter=require('./routes/tourRouter');
 const AppError=require('./utils/appError');
@@ -44,6 +46,8 @@ app.use(hpp());
 
 //Serving static files
 app.use(express.static(`${__dirname}/public`));
+
+app.use(compression());
 
 //Test middleware 
 app.use((req,res,next)=>{
