@@ -9,11 +9,11 @@ process.on('uncaughtException', err =>{
 })
 
 const app=require('./app')
-const PORT= process.env.PORT||3000;
+const PORT= process.env.PORT||8080;
 
 
 //mongoose connect
-if (process.env.NODE_ENV === 'production') {
+
 const db=process.env.DATABASE.replace(
     '<PASSWORD>',
     process.env.DATABASE_PASSWORD
@@ -30,7 +30,7 @@ mongoose
        // console.log(con.connection);
         console.log('DB connection successfully!');
     }).catch(err => console.log(err))
-}
+
 //   
 
 app.listen(PORT,()=>{
