@@ -35,6 +35,13 @@ const limiter=rateLimit({
     message:'Too many requests from this IP,please try again in an hour!'
 });
 
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
 app.use('/api',limiter);
 
 //Body parser, reading data from body into req.body
