@@ -29,6 +29,11 @@ const upload=multer({
 
 exports.uploadUserPhoto=upload.single('photo');
 
+exports.resizeUserPhoto=(req,res,next) => {
+    if(!req.file) return next();
+
+}
+
 const filterObj=(obj,...allowedFields)=>{
   const newObj={};
     Object.keys(obj).forEach(el=>{

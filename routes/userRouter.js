@@ -15,6 +15,6 @@ router.patch('/resetPassword/:token',authController.resetPassword);
 router.patch('/updateMYpassword',authController.protect,authController.updatePassword);
               
 router.route('/').get(authController.protect,authController.restictTo('admin'),userController.getalluser);
-router.patch('/updateMe',authController.protect,userController.uploadUserPhoto,userController.updateMe);
+router.patch('/updateMe',authController.protect,userController.uploadUserPhoto,userController.resizeUserPhoto,userController.updateMe);
 router.delete('/deleteMe',authController.protect,userController.deleteMe);
 module.exports=router;

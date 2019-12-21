@@ -16,17 +16,17 @@ const golobalErrorController=require('./controllers/errorController')
 
 
 const app=express();
+app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 //Global Middelware
    // set security HTTP headers
    app.use(helmet());
 
    app.use(cors());
-
    //Development logging
-if(process.env.NODE_ENV==='development'){
-    app.use(morgan('dev'))
-}
+// if(process.env.NODE_ENV==='development'){
+//     app.use(morgan('dev'))
+// }
 
 //Limit requsets from same API
 const limiter=rateLimit({
@@ -36,11 +36,19 @@ const limiter=rateLimit({
 });
 
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+app.all((req,res,next)=>{
+    res.header('Access-Control-Allow-Origin','*');
+    res.header('Access-Control-Allow-Headers','*');
+
+    if(req.method === 'OPTIONS'){
+        res.header('Access-Control-Allow-Methods','PUT','POST','PATCH','DELETE','GET');
+        return res.status(200).json({});
+    }
+
     next();
-  });
+
+});
+
 
 app.use('/api',limiter);
 
