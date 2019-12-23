@@ -12,7 +12,8 @@ const cors = require('cors');
 const userRouter=require('./routes/userRouter');
 const tourRouter=require('./routes/tourRouter');
 const AppError=require('./utils/appError');
-const golobalErrorController=require('./controllers/errorController')
+const golobalErrorController=require('./controllers/errorController');
+const reviewRouter=require('./routes/reviewRoutes');
 
 
 const app=express();
@@ -24,9 +25,9 @@ app.use(bodyParser.json());
 
    app.use(cors());
    //Development logging
-// if(process.env.NODE_ENV==='development'){
-//     app.use(morgan('dev'))
-// }
+if(process.env.NODE_ENV==='development'){
+    app.use(morgan('dev'))
+}
 
 //Limit requsets from same API
 const limiter=rateLimit({
@@ -80,6 +81,7 @@ app.use((req,res,next)=>{
 //ROUTERS
 app.use('/api/slvist/user',userRouter);
 app.use('/api/slvist/tour',tourRouter);
+app.use('/api/slvist/reviews', reviewRouter);
 
 app.get('/',(req,res)=>{
     res.status(200).json({ Message:'Hello from server side!', App:'API'});

@@ -17,4 +17,10 @@ router.patch('/updateMYpassword',authController.protect,authController.updatePas
 router.route('/').get(authController.protect,authController.restictTo('admin'),userController.getalluser);
 router.patch('/updateMe',authController.protect,userController.uploadUserPhoto,userController.resizeUserPhoto,userController.updateMe);
 router.delete('/deleteMe',authController.protect,userController.deleteMe);
+
+
+
+
+
+
 module.exports=router;

@@ -22,7 +22,7 @@ mongoose
         // useNewUrlParser: true, 
         useUnifiedTopology: true, 
          useNewUrlParser: true,
-        // useFindAndModify: false,
+         useFindAndModify: false,
          useCreateIndex: true,
         
     }).then( con =>{

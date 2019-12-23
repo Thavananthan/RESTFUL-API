@@ -25,7 +25,7 @@ const tourSchema= new mongooes.Schema({
     tourType:{
         type:String,
         required:[true,'A tour must have a places type']
-    },
+    }, 
     ratingAverage:{
         type:Number,
         default:4.5,
@@ -43,7 +43,7 @@ const tourSchema= new mongooes.Schema({
     },
     description:{
         type:String,
-        trim:true
+        trim:true 
     },
     imageCover:{
         type:String,
@@ -81,8 +81,22 @@ const tourSchema= new mongooes.Schema({
     //  ]
 
 
-});
+},
+{
+    toJSON:{virtuals:true},
+    toObject:{virtuals:true}
+}
+);
 
+
+// virtuals populate
+
+tourSchema.virtual('reviews',{
+    ref:'Review',
+    foreignField:'tour',
+    localField:'_id'
+});
+ 
 //DOCUMENT MIDDLEWARE:runs before.save() and create()
 tourSchema.pre('save',function(next){
     this.slug=slugify(this.name,{lower:true});
