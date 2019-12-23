@@ -84,8 +84,7 @@ app.use('/api/slvist/tour',tourRouter);
 app.use('/api/slvist/reviews', reviewRouter);
 
 app.get('/',(req,res)=>{
-    res.end('<h1>World</h1>');
-    res.status(200).json({ Message:'Hello from server side!', App:'API'});
+    res.status(200).json({ Message:'Hello from server side!'});
 })
 
 app.post('/',(req,res)=>{
