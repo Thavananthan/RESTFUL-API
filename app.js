@@ -53,6 +53,7 @@ app.all((req,res,next)=>{
 
 app.use('/api',limiter);
 
+app.use(express.static('public'));
 //Body parser, reading data from body into req.body
 app.use(express.json())
 
