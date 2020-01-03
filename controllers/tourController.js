@@ -1,7 +1,10 @@
+
 const multer=require('multer');
 const sharp=require('sharp');
 const Tour=require('./../models/tourModel');
 const catchAsync=require('./../utils/catchAsync');
+const AppError=require('./../utils/appError');
+const factory=require('./handlerFactory');
 
 
 const multerStorage=multer.memoryStorage(); 
@@ -27,7 +30,7 @@ exports.uploadTourImages= upload.fields([
 
 exports.resizeTourImages= catchAsync(async(req,res,next) => {
     if(!req.files.imageCover || !req.files.images) return next();
-    console.log( await req.body.imageCover);
+   // console.log( await req.body.imageCover);
 
     //1) Cover Image
       req.body.imageCover=`tour-${req.params.id}-${Date.now()}-cober.jpeg`;
@@ -38,20 +41,12 @@ exports.resizeTourImages= catchAsync(async(req,res,next) => {
      .jpeg({quality:90})
      .toFile(`public/images/tours/${req.body.imageCover}`);
     
-     
+     //2)Images
+      
      next();
 });
  
-exports.createTour = catchAsync(async(req, res) => {
- const newTour=  await Tour.create(req.body);
 
-    res.status(201).json({
-        status:'success',
-        date:{
-            tour:newTour
-        }
-    });
-});
 
 exports.getAllTours= catchAsync( async(req, res) =>{
    //BUILD QUERY
@@ -89,36 +84,9 @@ exports.getAllTours= catchAsync( async(req, res) =>{
 
 });
 
-exports.getTour=catchAsync( async(req, res) =>{
-    const tour=await Tour.findById(req.params.id).populate('reviews');
+exports.createTour = factory.createOne(Tour);
+exports.getTour=factory.getOne(Tour,{path:'reviews'})
+exports.updateTour= factory.updateOne(Tour);
+exports.deleteTour= factory.deleteOne(Tour);
 
-    res.status(200).json({
-        status:'success',
-        data:{
-            tour
-        }
-    });
-});
-
-exports.updateTour= catchAsync(async(req,res) =>{
-    const tour= await Tour.findByIdAndUpdate(req.params.id, req.body,{
-        new:true,
-        runValidators: true
-    }); 
-
-    res.status(200).json({
-        status:'success',
-        data:{
-            tour:tour
-        }
-    });
-});
-
-exports.deleteTour= catchAsync( async(req, res)=>{
-    await Tour.findByIdAndDelete(req.params.id);
-
-       res.json({
-           status:'success',
-           data:null
-       });
-});
+    

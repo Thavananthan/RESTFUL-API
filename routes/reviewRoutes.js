@@ -9,6 +9,9 @@ const router=express.Router({mergeParams:true});
 //POST/review
 
 router.get('/',reviewController.getAllReviews);
-router.post('/',authController.protect,authController.restictTo('user'),reviewController.createReviews);
+router.post('/',authController.protect,authController.restictTo('user'),reviewController.setTourUserId,reviewController.createReviews);
+router.delete('/:id',reviewController.deleteReview);
+router.patch('/:id',reviewController.updateReview);
+router.get('/:id',reviewController.getOneReview);
 
 module.exports=router;
