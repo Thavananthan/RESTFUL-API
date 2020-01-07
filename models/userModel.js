@@ -17,7 +17,7 @@ const userSchema=new mongoose.Schema({
     },
     photo:{
         type:String,
-        default:'default.jpeg'
+        default:'https://shielded-retreat-77960.herokuapp.com/images/users/default.jpg'
     },
     role:{
         type:String,
