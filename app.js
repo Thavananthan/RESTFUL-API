@@ -85,7 +85,7 @@ app.use('/api/slvist/tour',tourRouter);
 app.use('/api/slvist/reviews', reviewRouter);
 
 app.get('/',(req,res)=>{
-    res.render('index')
+    res.status(200).json({ Message:'Love you babe miss u!'});
 })
 
 app.post('/',(req,res)=>{
