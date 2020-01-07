@@ -45,6 +45,7 @@ exports.resizeUserPhoto=catchAsync(async (req,res,next) => {
      .jpeg({quality:90})
      .toFile(`public/images/users/${req.file.filename}`);
      
+     res.json({fileUrl:'https://shielded-retreat-77960.herokuapp.com/'+ req.file.filename})
      next();
 });
 
