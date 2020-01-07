@@ -85,7 +85,7 @@ app.use('/api/slvist/tour',tourRouter);
 app.use('/api/slvist/reviews', reviewRouter);
 
 app.get('/',(req,res)=>{
-    res.rende('index')
+    res.render('index')
 })
 
 app.post('/',(req,res)=>{
