@@ -53,7 +53,7 @@ app.all((req,res,next)=>{
 
 app.use('/api',limiter);
 
-app.use('/public',express.static('public'));
+
 //Body parser, reading data from body into req.body
 app.use(express.json())
 
@@ -85,7 +85,7 @@ app.use('/api/slvist/tour',tourRouter);
 app.use('/api/slvist/reviews', reviewRouter);
 
 app.get('/',(req,res)=>{
-    res.status(200).json({ Message:'Love you babe miss u!'});
+    res.rende('index')
 })
 
 app.post('/',(req,res)=>{
