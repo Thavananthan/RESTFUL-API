@@ -88,7 +88,7 @@ exports.updateMe =catchAsync(async(req,res,next)=>{
 
         //2  filter out unwanted fields name that are not allowed to be update
       const filteredBody= filterObj(req.body,'name','email'); 
-      if(req.file) filteredBody.photo='https://shielded-retreat-77960.herokuapp.com/images/users'+req.file.filename;
+      if(req.file) filteredBody.photo='https://shielded-retreat-77960.herokuapp.com/images/users/'+req.file.filename;
     
        //3 update user doucment
       const updatedUser = await User.findByIdAndUpdate( req.user._id, filteredBody,{
