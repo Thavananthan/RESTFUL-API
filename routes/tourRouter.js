@@ -18,7 +18,7 @@ router.use('/:tourId/reviews',reviewRouter);
 
 router.get('/',tourController.getAllTours); 
 router.get('/:id',tourController.getTour);
-router.post('/addTour',tourController.createTour);
+router.post('/addTour',tourController.uploadTourImages,tourController.resizeTourImages,tourController.createTour);
 router.patch('/updateTour/:id',tourController.uploadTourImages,tourController.resizeTourImages,tourController.updateTour);
 router.delete('/deleteTour/:id',tourController.deleteTour);
 
